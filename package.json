@@ -1,0 +1,24 @@
+{
+  "name": "mongoose-expenses",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samerma/mongoose-expenses.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samerma/mongoose-expenses/issues"
+  },
+  "homepage": "https://github.com/samerma/mongoose-expenses#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.25.3",
+    "mongoose": "^5.9.13"
+  }
+}
