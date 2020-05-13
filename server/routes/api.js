@@ -12,6 +12,24 @@ router.get('/expenses', function (req, res) {
         })
 })
 
+router.get('/expenses/:group/:total?', function (req, res) {
+    const group = req.params.group
+    const total = req.params.total
+
+    Expense.find({ 'group': group }, function (error, expenses) {
+        if (total == 'true') {
+            let sum = 0
+            expenses.forEach(exp => sum += exp.amount)
+            res.send('' + sum)
+        }
+        else {
+            res.send(expenses)
+        }
+    })
+
+
+})
+
 router.post('/new', function (req, res) {
     const expense = new Expense({
         item: req.body.item,
@@ -24,6 +42,20 @@ router.post('/new', function (req, res) {
         res.end()
     })
 })
+
+router.put('/update/:group1/:group2', function (req, res) {
+    const group1 = req.params['group1']
+    const group2 = req.params['group2']
+    Expense.findOne({ 'group': group1 }, function (error, expense) {
+        const changedGroup = expense.group
+        expense.group = group2
+        expense.save(function (err, exp) {
+            const message = `Item ${exp.item} group was changed from ${changedGroup} to ${exp.group}`
+            res.send(message)
+        })
+    })
+})
+
 
 
 
