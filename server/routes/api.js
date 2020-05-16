@@ -4,12 +4,24 @@ const Expense = require('../models/Expense.js')
 const moment = require('moment')
 
 
-router.get('/expenses', function (req, res) {
-    Expense.find({})
-        .sort('-date')
-        .exec(function (err, expenses) {
-            res.send(expenses)
-        })
+router.get('/expenses/:d1?/:d2?', function (req, res) {
+    const d1 = req.query.d1
+    const d2 = req.query.d2
+    if (d1 && d2) {
+        Expense.find({
+            "date": { "$gte": d1, "$lt": d2 }
+        }).sort('-date')
+            .exec(function (err, expenses) {
+                res.send(expenses)
+            })
+    }
+    else {
+        Expense.find({})
+            .sort('-date')
+            .exec(function (err, expenses) {
+                res.send(expenses)
+            })
+    }
 })
 
 router.get('/expenses/:group/:total?', function (req, res) {
@@ -55,15 +67,6 @@ router.put('/update/:group1/:group2', function (req, res) {
         })
     })
 })
-
-
-
-
-
-
-
-
-
 
 
 

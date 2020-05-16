@@ -22,7 +22,7 @@ app.use('/', api)
 } */
 //////////////////////////////////
 
-const port = 3001
+const port = 3002
 app.listen(port, function () {
     console.log(`Running on port ${port}`)
 })
